@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Card Filter</title>
+    <link rel="stylesheet" href="cards.css"> <!-- Optional: You can style your cards using CSS -->
+</head>
+<body>
+<div>
+    <label for="search-title">Search by Title:</label>
+    <input type="checkbox" id="search-title" checked>
+</div>
+<div>
+    <label for="search-content">Search by Content:</label>
+    <input type="checkbox" id="search-content" checked>
+</div>
+<div>
+    <label for="search-content">Search by leadeng name:</label>
+    <input type="checkbox" id="search-leadeng" checked>
+</div>
+<div>
+    <label for="search-content">Search by leadeng email:</label>
+    <input type="checkbox" id="search-leadeng-email" checked>
+</div>
+<div>
+    <label for="search-content">Search by description:</label>
+    <input type="checkbox" id="search-description" checked>
+</div>
+<div>
+    <label for="search-content">Search by date:</label>
+    <input type="checkbox" id="search-date" checked>
+</div>
+<div>
+    <label for="search-content">Search by version:</label>
+    <input type="checkbox" id="search-version" checked>
+</div>
+<div>
+    <input type="text" id="search-input" placeholder="Search text...">
+</div>
+<div class="card-container" id="card-container"></div>
+
+<input type="file" id="openapi-file" accept=".yaml, .yml">
+<button id="validate-button">Validate</button>
+<button id="upload-button">Upload</button>
+
+<div id="validation-result"></div>
+<div id="upload-result"></div>
+
+<button id="openApiDoc-button", onClick="redirectToSwagger()">OpenSwagger</button>
+
+<script src="https://cdn.jsdelivr.net/npm/swagger-parser@10.0.3/index.min.js"></script>
+
+<script src="cards.js"></script>
+<script src ="validateUpload.js"></script>
+<script src="redirectToSwagger.js"></script>
+</body>
+</html>
+

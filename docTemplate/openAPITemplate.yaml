@@ -1,0 +1,19 @@
+openapi: 3.0.3
+info:
+  title: balls
+  x-category: application
+  description: |-
+    This is a sample description of a microservice application
+  contact:
+    x-name: John Doe
+    email: JohnDoe@ericsson.com
+  x-dateCreated: '04/09/2023'
+  version: 1.0.1
+externalDocs:
+  description: External docs for microservice
+  url: http://doc.ericsson.com
+x-dependencies: 
+  - MicroserivceA
+  - MicroserviceB
+paths: {}
+ 

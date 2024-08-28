@@ -1,0 +1,31 @@
+version: "1"
+services:
+  web:
+    build:
+      context: .
+    ports:
+      - "8080:8080"
+    volumes:
+      - shared-data:/volume
+  swagger-editor:
+    image: "swaggerapi/swagger-editor"
+    ports:
+      - "9090:8080"
+    volumes:
+      - shared-data:/volume
+    environment:
+      - QUERY_CONFIG_ENABLED=true
+  mongo:     # To access monogdb GUI download MongoDB compass and enter in the url mongodb://localhost:8888
+    image: "mongo"
+    ports:
+      - "8888:27017"
+  redocly:
+    image: "redocly/redoc"
+    volumes:
+      - shared-data:/usr/share/nginx/html/volume
+    ports:
+      - "8081:80"
+    environment:
+      - SPEC_URL=/volume/openapi.yaml
+volumes:
+  shared-data:

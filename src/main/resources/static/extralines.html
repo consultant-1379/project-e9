@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E3 Page</title>
+    <!-- Load d3.js -->
+    <script src="https://d3js.org/d3.v4.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+</head>
+<body>
+
+
+<div id="my_graph"></div>
+
+<script>
+    // set the dimensions and margins of the graph
+    var margin = {top: 10, right: 30, bottom: 30, left: 40},
+        width = 1200 - margin.left - margin.right, // Increase width
+        height = 1000 - margin.top - margin.bottom; // Increase height
+
+    // append the svg object to the body of the page
+    var svg = d3.select("#my_graph")
+        .append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+    // Define the links array in a more accessible scope
+    var links = [];
+
+    d3.json("network.json", function(data) {
+        // Initialize the links
+        links = data.links;
+
+        // Calculate initial positions of nodes in a circular arrangement
+        var radius = Math.min(width, height) / 2 - 50; // Adjust the radius as needed
+        var centerX = width / 3;
+        var centerY = height / 3;
+
+        data.nodes.forEach(function(node, index) {
+            var angle = (index / data.nodes.length) * 2 * Math.PI;
+            var degree = data.nodes.length; // Get the degree of the node
+            var adjustedRadius = radius + degree * 10; // Adjust spacing based on degree
+            node.x = centerX + adjustedRadius * Math.cos(angle);
+            node.y = centerY + adjustedRadius * Math.sin(angle);
+        });
+
+        // Initialize the nodes
+        var link = svg
+            .selectAll("line")
+            .data(data.links)
+            .enter()
+            .append("line")
+            .style("stroke", "#aaa")
+            .attr("class", function(d) {
+                return "link-" + d.id; // Assign a unique class based on the "id" property
+            });   
+        var node = svg
+            .selectAll("circle")
+            .data(data.nodes)
+            .enter()
+            .append("g")
+            .attr("class", "node");
+
+        node.append("circle")
+            .attr("r", 20)
+            .style("fill", "#69b3a2")
+            .attr("class", function(d) {
+                return "circle-" + d.id;
+            });
+
+        node.append("text")
+            .attr("dx", 0)
+            .attr("dy", -25)
+            .style("text-anchor", "middle")
+            .text(function(d) {
+                return "service " + d.id;
+            });
+
+        var simulation = d3.forceSimulation(data.nodes).force("link", d3.forceLink()
+                .id(function(d) { return d.id; })
+                .links(data.links)
+                .distance(100)) // Increase the distance value
+            .force("charge", d3.forceManyBody().strength(-800)) // Increase the strength value
+            .force("center", d3.forceCenter(width / 2, height / 2))
+            .on("end", ticked);
+
+        console.log(data.links)
+        // This function is run at each iteration of the force algorithm, updating the nodes' position.
+        function ticked() {
+            link
+                .attr("x1", function(d) { return d.source.x; })
+                .attr("y1", function(d) { return d.source.y; })
+                .attr("x2", function(d) { return d.target.x; })
+                .attr("y2", function(d) { return d.target.y; });
+
+            node
+                .attr("transform", function(d) {
+                    return "translate(" + d.x + "," + d.y + ")";
+                });
+        }
+
+        // Function to remove all links
+        function removeAllLinks() {
+            // Clear the links data
+            links = [];
+
+            // Remove the existing links from the DOM
+            svg.selectAll("line").remove();
+
+            // Restart the simulation to reflect the changes
+            simulation.alpha(1).restart();
+        }
+
+        // Function to add a new link
+        function addNewLink() {
+            // Define the source and target nodes for the new link
+            var sourceNodeIndex = 0; // Replace with the desired source node index
+            var targetNodeIndex = 2; // Replace with the desired target node index
+
+            // Create a new link data entry
+            var newLink = {
+                source: data.nodes[sourceNodeIndex],
+                target: data.nodes[targetNodeIndex]
+            };
+
+            // Check if the link already exists to avoid duplication
+            var linkExists = links.some(function(link) {
+                return (link.source === newLink.source && link.target === newLink.target) ||
+                    (link.source === newLink.target && link.target === newLink.source);
+            });
+
+            if (!linkExists) {
+                // Add the new link data entry to the links array
+                links.push(newLink);
+
+                // Redraw or update the visualization as needed
+                // For example, you can add the new link to the DOM as a line
+                var newLinkElement = svg.selectAll("line")
+                    .data(links)
+                    .enter()
+                    .append("line")
+                    .style("stroke", "#FF0000");
+
+                // Update the links in the force simulation
+                simulation.force("link", d3.forceLink()
+                .id(function(d) { return d.id; })
+                .links(data.links)
+                .distance(100)) // Increase the distance value
+            
+                simulation.force("charge", d3.forceManyBody().strength(-800)) // Increase the strength value
+            
+                simulation.on("end", ticked);
+
+                // Restart the simulation to reflect the changes
+                simulation.alpha(1).restart();
+            }
+        }
+
+    });
+</script>
+
+</body>
+</html>
+

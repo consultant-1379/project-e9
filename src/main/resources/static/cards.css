@@ -1,0 +1,250 @@
+.card {
+    border: 1px solid #ccc;
+    padding: 16px;
+    margin: 16px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .card-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Three columns per row */
+    gap: 20px; /* Adjust the gap between cards as needed */
+  }
+  
+  .card h2 {
+    font-size: 24px;
+    margin-bottom: 8px;
+  }
+  
+  .card p {
+    font-size: 16px;
+  }
+
+  /* Modal container styles */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background overlay */
+    z-index: 1; /* Ensure the modal appears above other content */
+  }
+  
+  /* Modal content styles */
+  .modal-content {
+    background-color: #fff;
+    width: 80%;
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position: relative;
+  }
+  
+  /* Close button (x button) styles */
+  .close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #333; /* Button color */
+  }
+  
+  /* Close button hover effect */
+  .close-button:hover {
+    color: #ff0000; /* Change color on hover */
+  }
+  
+  /* Style the modal's title and content */
+  #modal-title {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  #modal-content {
+    font-size: 16px;
+  }
+  
+  /* Optionally, you can add animation for the modal */
+  .modal {
+    animation: fadeIn 0.3s ease-in-out;
+  }
+  
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+/* CSS styles for buttons */
+
+
+/* Apply styles to the header element */
+html {
+    background-color: #f5f5f5; /* Background color for the header */
+    color: #00235e; /* Text color for the header */
+    padding: 20px; /* Padding around the header content */
+    text-align: center; /* Center-align header content */
+}
+
+.logo {
+    display: flex; /* Use flexbox to align items horizontally */
+    align-items: center; /* Vertically center items */
+}
+
+/* Style the logo */
+.logo img {
+    width: 100px; /* Set the desired width for the image */
+    height: auto; /* Automatically adjust the height to maintain aspect ratio */
+    margin-right: 10px;
+}
+
+/* Style the heading */
+.logo h1 {
+    font-size: 24px; /* Adjust the font size for the heading */
+    margin: 0; /* Add margin to separate the logo and heading */
+}
+
+/* Add this CSS to your cards.css or a new CSS file */
+/* Style to put elements in one line */
+.container > * {
+    display: inline-block;
+    vertical-align: top; /* Adjust vertical alignment as needed */
+    margin: 10px; /* Add margin between elements as needed */
+}
+
+/* Style your header separately if needed */
+header {
+    text-align: left; /* Align header content to the left */
+}
+
+.container{
+text-align:left;
+}
+
+        /* Style for the dropdown container */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        /* Style for the label of the dropdown */
+        .dropdown-label {
+            background-color: #f0f0f0;
+            color:black;
+            padding: 10px;
+            border: 1px solid #ccc;
+            cursor: pointer;
+        }
+
+        /* Style for the checkboxes container */
+        .dropdown-checkboxes {
+            display: none;
+            position: absolute;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            max-height: 150px;
+            overflow-y: auto;
+        }
+
+        /* Style for individual checkboxes and labels on the same line */
+        .dropdown-checkbox label {
+            display: flex;
+            align-items: center;
+            padding: 5px;
+        }
+
+        /* Style for the checkbox input */
+        .dropdown-checkbox input[type="checkbox"] {
+            margin-right: 5px;
+        }
+
+                .container {
+                    display: flex;
+                    justify-content: space-between; /* Put items at the start and end */
+                }
+
+                /* Style for the card container on the left */
+                .card-container {
+                    width: 20%; /* Adjust the width as needed */
+                }
+
+                /* Style for my_graph on the right */
+                #my_graph {
+                    width: 80%; /* Adjust the width as needed */
+                }
+                /* Basic button style */
+                button {
+                  padding: 10px 20px; /* Adjust padding as needed for button size */
+                  background-color: #007bff; /* Button background color */
+                  color: #fff; /* Button text color */
+                  border: none; /* Remove button border */
+                  border-radius: 4px; /* Rounded corners */
+                  cursor: pointer; /* Add pointer cursor on hover */
+                  transition: background-color 0.3s ease; /* Smooth background color transition */
+                }
+
+                /* Button hover effect */
+                button:hover {
+                  background-color: #0056b3; /* Darker background color on hover */
+                }
+
+                .dropdown-label{
+                                  padding: 10px 20px; /* Adjust padding as needed for button size */
+                                  background-color: #007bff; /* Button background color */
+                                  color: #fff; /* Button text color */
+                                  border: none; /* Remove button border */
+                                  border-radius: 4px; /* Rounded corners */
+                                  cursor: pointer; /* Add pointer cursor on hover */
+                                  transition: background-color 0.3s ease; /* Smooth background color transition */
+                }
+
+
+
+                /* Button with an outlined style */
+                button.outlined {
+                  background-color: transparent;
+                  border: 1px solid #007bff; /* Button border color */
+                  color: #007bff; /* Button text color */
+                  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth color transitions */
+                }
+
+                /* Outlined button hover effect */
+                button.outlined:hover {
+                  background-color: #007bff; /* Background color on hover */
+                  color: #fff; /* Text color on hover */
+                }
+
+                /* Button with a different color scheme */
+                button.secondary {
+                  background-color: #6c757d; /* Different background color */
+                  color: #fff; /* Text color */
+                }
+
+                /* Secondary button hover effect */
+                button.secondary:hover {
+                  background-color: #495057; /* Darker background color on hover */
+                }
+
+                /* Large button */
+                button.large {
+                  padding: 15px 30px; /* Adjust padding for larger size */
+                }
+
+
+                button.small {
+                  padding: 5px 10px; /* Adjust padding for smaller size */
+                }
+
+
+
+  
+  
